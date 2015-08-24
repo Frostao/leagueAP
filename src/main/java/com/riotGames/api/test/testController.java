@@ -35,11 +35,9 @@ public class testController {
 			String output;
 			System.out.println("Output from Server .... \n");
 			while ((output = br.readLine()) != null) {
-				System.out.println(output);
 				json = (JSONObject)new JSONParser().parse(output);
+				System.out.println(output);
 			}
-			
-	
 			conn.disconnect();
 
 		  } catch (MalformedURLException e) {
@@ -50,9 +48,8 @@ public class testController {
 
 			e.printStackTrace();
 
-		  } catch (ParseException e) {
+		  } catch (Exception e) {
 				System.out.println("The freaking JSON is wrong!!");
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 		  }
 		return json;
