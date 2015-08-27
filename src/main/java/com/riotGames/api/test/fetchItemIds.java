@@ -52,9 +52,12 @@ public class fetchItemIds {
 	public Set<String> getItems(String matchId) {
 		String authKey = "3f914e0d-b4e8-4ed7-a977-e3af14a021a7";
 		JSONObject json = null;
+		//For a participant list
 		JSONArray participants = null;
+		//For each participant
 		JSONObject participant = null;
-		JSONObject items = null;
+		//For the stats of each participant
+		JSONObject stats = null;
 		Set<String> set = null;
 		List<String> listItems = new ArrayList<String>();
 		try {
@@ -81,21 +84,37 @@ public class fetchItemIds {
 				for(int i = 0; i < participants.size(); i++) {
 					participant = (JSONObject) participants.get(i);
 					if(!isThereInJSON(participant.get("championId").toString())) {
+						//Intializing a new Champion which is not there in the JSON
 						Champion c = new Champion();
 						c.setId(participant.get("championId").toString());
 						c.setFreq(0);
 						c.setItems(new ArrayList<Item>());
-						c.setTotalMagicDamageDealt(Integer.parseInt(participant.get("stats").toString()));
-						items = (JSONObject) participant.get("stats");
-						List<Item> tempListOfItems = new ArrayList<Item>();
-						for(int j = 0; j < 6; j++) {
-							Item item = new Item(Integer.parseInt(items.get("item"+Integer.toString(j)).toString()), 0);
-							tempListOfItems.add(item);
+						
+						stats = (JSONObject) participant.get("stats");
+						//List of items of a particular participant/new Champion
+						List<Item> listOfItems = new ArrayList<Item>();
+						for(int j = 0; j < 7; j++) {
+							Item item = new Item(Integer.parseInt(stats.get("item"+Integer.toString(j)).toString()), 0);
+							listOfItems.add(item);
 						}
-						c.setItems(tempListOfItems);
+						c.setItems(listOfItems);
+						theJSON.add(c);
 					} else {
 						for(int j = 0; j < theJSON.size(); j++) {
-							
+							if(theJSON.get(j).getId().equals(participant.get("championId").toString())) {
+								stats = (JSONObject) participant.get("stats");
+								theJSON.get(j).setFreq(theJSON.get(j).getFreq()+1);
+								for(int k = 0; k < theJSON.get(j).getItems().size() ; k++) {
+									for(int l = 0; l < 7; l++) {
+										if(theJSON.get(j).getItems().get(k).getId() == Integer.parseInt(stats.get("item"+Integer.toString(l)).toString())) {
+											theJSON.get(j).getItems().get(k).setFreq(theJSON.get(j).getItems().get(k).getFreq()+1);
+										} else {
+											Item new_Item = new Item(Integer.parseInt(stats.get("item"+Integer.toString(l)).toString()), 0);
+											theJSON.get(j).getItems().add(new_Item);
+										}
+									}
+								}
+							}
 						}
 					}
 				}
@@ -117,17 +136,4 @@ public class fetchItemIds {
 		}
 		return false;
 	}
-	
-	public JSONArray getTopFour(JSONArray participants) {
-		JSONArray topFour = new JSONArray();
-		for(int i = 0; i < participants.size(); i++) {
-			 JSONObject participant = (JSONObject) participants.get(i);
-			 JSONObject stats = (JSONObject) participant.get("stats");
-			 Integer.parseInt(stats.get("magicDamageDealt").toString());
-			 participants.sort();
-		}
-		return topFour;
-	}
-	
-
 }
