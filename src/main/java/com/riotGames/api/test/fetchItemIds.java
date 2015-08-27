@@ -24,6 +24,8 @@ public class fetchItemIds {
 	public static void main(String[] args) {
 		
 		getItems("1852548676");
+		getItems("1852558827");
+		getItems("1852559208");
 		System.out.println(theJSON.toString());
 		for(Champion c: theJSON) {
 			System.out.println(c.getId());
@@ -66,7 +68,7 @@ public class fetchItemIds {
 	
 	public static void getItems(String matchId) {
 		//Your authorization key
-		String authKey = "3f914e0d-b4e8-4ed7-a977-e3af14a021a7";
+		String authKey = "c4cab17e-040e-4665-a19d-35cdae7275a3";
 		//the json output from riot games api
 		JSONObject json = null;
 		//For a participant list
@@ -93,7 +95,7 @@ public class fetchItemIds {
 			BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
 
 			String output;
-			int freq;
+			//int freq;
 			
 			//MAIN SHIT!
 			while ((output = br.readLine()) != null) {
@@ -112,34 +114,40 @@ public class fetchItemIds {
 						//Intializing a new Champion which is not there in the JSON
 						Champion c = new Champion();
 						c.setId(participant.get("championId").toString());
-						c.setFreq(0);
+						c.setFreq(1);
 						c.setItems(new ArrayList<Item>());
 						
 						stats = (JSONObject) participant.get("stats");
 						//List of items of a particular participant/new Champion
 						List<Item> listOfItems = new ArrayList<Item>();
 						for(int j = 0; j < 7; j++) {
-							Item item = new Item(Integer.parseInt(stats.get("item"+Integer.toString(j)).toString()), 0);
+							Item item = new Item(Integer.parseInt(stats.get("item"+Integer.toString(j)).toString()), 1);
 							listOfItems.add(item);
 						}
 						c.setItems(listOfItems);
 						theJSON.add(c);
 					} else {
+						//System.out.println(participant.get("championId").toString());
 						//Iterating over the JSON to get the match Object for the current participant that exists in the the JSON
 						for(int j = 0; j < theJSON.size(); j++) {
 							if(theJSON.get(j).getId().equals(participant.get("championId").toString())) {
 								stats = (JSONObject) participant.get("stats");
 								theJSON.get(j).setFreq(theJSON.get(j).getFreq()+1);
-								for(int k = 0; k < theJSON.get(j).getItems().size() ; k++) {
-									for(int l = 0; l < 7; l++) {
-										if(theJSON.get(j).getItems().get(k).getId() == Integer.parseInt(stats.get("item"+Integer.toString(l)).toString())) {
-											theJSON.get(j).getItems().get(k).setFreq(theJSON.get(j).getItems().get(k).getFreq()+1);
-										} else {
-											Item new_Item = new Item(Integer.parseInt(stats.get("item"+Integer.toString(l)).toString()), 0);
+								for(int k = 0; k < 7 ; k++) {
+									for(int l = 0; l < theJSON.get(j).getItems().size(); l++) {
+										if(theJSON.get(j).getItems().get(l).getId() == Integer.parseInt(stats.get("item"+Integer.toString(k)).toString())) {
+											//System.out.println("Found a match item");
+											theJSON.get(j).getItems().get(l).setFreq(theJSON.get(j).getItems().get(l).getFreq()+1);
+											break;
+										} else if (l == theJSON.get(j).getItems().size() - 1){
+											Item new_Item = new Item(Integer.parseInt(stats.get("item"+Integer.toString(k)).toString()), 1);
 											theJSON.get(j).getItems().add(new_Item);
+											break;
 										}
+										
 									}
 								}
+								break;
 							}
 						}
 					}
