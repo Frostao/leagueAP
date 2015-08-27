@@ -18,17 +18,24 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class fetchItemIds {
-	ArrayList<Champion> theJSON = new ArrayList<Champion>();
-	public void main(String[] args) {
-		JSONParser parser = new JSONParser();
+	//The main JSON - global variable(data source for the website)
+	static ArrayList<Champion> theJSON = new ArrayList<Champion>();
+	
+	public static void main(String[] args) {
+		
+		getItems("1852548676");
+		System.out.println(theJSON.toString());
+		/*JSONParser parser = new JSONParser();
 		Set<String> set511 = new HashSet<String>();
-		Set<String> set514 = new HashSet<String>();
+		//Set<String> set514 = new HashSet<String>();
+		//Not using yet
 		try {
 			Object obj_511 = parser.parse(new FileReader("src/main/resources/NA_5.11.json"));
-			Object obj_514 = parser.parse(new FileReader("src/main/resources/NA_5.14.json"));
+			
+			//Object obj_514 = parser.parse(new FileReader("src/main/resources/NA_5.14.json"));
 			
 			JSONArray JSON511 = (JSONArray) obj_511;
-			JSONArray JSON514 = (JSONArray) obj_514;
+			//JSONArray JSON514 = (JSONArray) obj_514;
 
 			for(int i = 0; i < 3; i++) {
 				//System.out.println("MatchID 5.11 " + i+1 + " "+ JSON511.get(i));
@@ -44,13 +51,15 @@ public class fetchItemIds {
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 		
 	}
 	
-	public Set<String> getItems(String matchId) {
+	public static void getItems(String matchId) {
+		//Your authorization key
 		String authKey = "3f914e0d-b4e8-4ed7-a977-e3af14a021a7";
+		//the json output from riot games api
 		JSONObject json = null;
 		//For a participant list
 		JSONArray participants = null;
@@ -58,10 +67,11 @@ public class fetchItemIds {
 		JSONObject participant = null;
 		//For the stats of each participant
 		JSONObject stats = null;
-		Set<String> set = null;
-		List<String> listItems = new ArrayList<String>();
+		
+		//Set<String> set = null;
+		//List<String> listItems = new ArrayList<String>();
 		try {
-
+			//Getting the data from the RG API
 			URL url = new URL("https://na.api.pvp.net/api/lol/na/v2.2/match/" + matchId + "?api_key=" + authKey);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
@@ -77,12 +87,19 @@ public class fetchItemIds {
 			String output;
 			int freq;
 			
+			//MAIN SHIT!
 			while ((output = br.readLine()) != null) {
+				//RG API JSON 
 				json = (JSONObject)new JSONParser().parse(output);
+				//Getting the JSONArray of participants
 				participants = (JSONArray) json.get("participants");
+				//Getting Top four of the participants
 				participants = getTopFour(participants);
-				for(int i = 0; i < participants.size(); i++) {
+				
+				for(int i = 0; i < 4; i++) {
+					//Getting each participant in the Top 4 list
 					participant = (JSONObject) participants.get(i);
+					//Checking whether this ^^ particular participant is there in the main JSON output or not 
 					if(!isThereInJSON(participant.get("championId").toString())) {
 						//Intializing a new Champion which is not there in the JSON
 						Champion c = new Champion();
@@ -100,6 +117,7 @@ public class fetchItemIds {
 						c.setItems(listOfItems);
 						theJSON.add(c);
 					} else {
+						//Iterating over the JSON to get the match Object for the current participant that exists in the the JSON
 						for(int j = 0; j < theJSON.size(); j++) {
 							if(theJSON.get(j).getId().equals(participant.get("championId").toString())) {
 								stats = (JSONObject) participant.get("stats");
@@ -119,16 +137,14 @@ public class fetchItemIds {
 					}
 				}
 			}
-			set = new HashSet<String>(listItems);
 			conn.disconnect();
 
 		  } catch (Exception e) {
 			e.printStackTrace();
 		}
-		return set;
 	}
-	
-	public boolean isThereInJSON(String champId) {
+	//Iteration over THE JSON
+	public static boolean isThereInJSON(String champId) {
 		for(int i = 0; i < theJSON.size(); i++ ) {
 			if(theJSON.get(i).getId().equals(champId)) {
 				return true;
@@ -137,7 +153,7 @@ public class fetchItemIds {
 		return false;
 	}
 	
-	private int compare(JSONObject o1, JSONObject o2) {
+	private static int compare(JSONObject o1, JSONObject o2) {
 		// TODO Auto-generated method stub
 		int magicD1 = Integer.parseInt(o1.get("magicDamageDealt").toString());
 		int magicD2 = Integer.parseInt(o2.get("magicDamageDealt").toString());
@@ -149,8 +165,7 @@ public class fetchItemIds {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public JSONArray getTopFour(JSONArray participants) {
-		JSONArray topFour = new JSONArray();
+	public static JSONArray getTopFour(JSONArray participants) {
 		
 		//sort the 10 participants
 		boolean swapped = true;
@@ -175,6 +190,6 @@ public class fetchItemIds {
 			 //ChampionComparator a = new ChampionComparator();
 			 //participants.sort(a);
 		}
-		return topFour;
+		return participants;
 	}
 }
