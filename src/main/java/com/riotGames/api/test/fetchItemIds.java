@@ -7,10 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -85,7 +82,6 @@ public class fetchItemIds {
 						c.setId(participant.get("championId").toString());
 						c.setFreq(0);
 						c.setItems(new ArrayList<Item>());
-						c.setTotalMagicDamageDealt(Integer.parseInt(participant.get("stats").toString()));
 						items = (JSONObject) participant.get("stats");
 						List<Item> tempListOfItems = new ArrayList<Item>();
 						for(int j = 0; j < 6; j++) {
@@ -118,16 +114,48 @@ public class fetchItemIds {
 		return false;
 	}
 	
+	
+	private int compare(JSONObject o1, JSONObject o2) {
+		// TODO Auto-generated method stub
+		int magicD1 = Integer.parseInt(o1.get("magicDamageDealt").toString());
+		int magicD2 = Integer.parseInt(o2.get("magicDamageDealt").toString());
+		if (magicD1 > magicD2) {
+			return 1;
+		} else {
+			return -1;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
 	public JSONArray getTopFour(JSONArray participants) {
 		JSONArray topFour = new JSONArray();
+		
+		//sort the 10 participants
+		boolean swapped = true;
+		int j = 0;
+		JSONObject tmp;
+		while (swapped) {
+			swapped = false;
+			j++;
+			for (int i = 0; i < participants.size() - j; i++) {                                       
+				if (compare((JSONObject)participants.get(i), (JSONObject)participants.get(i+1)) < 0) {                          
+					tmp = (JSONObject)participants.get(i);
+					participants.set(i, participants.get(i+1));
+					participants.set(i+1, tmp);
+					swapped = true;
+				}
+			}                
+		}
 		for(int i = 0; i < participants.size(); i++) {
 			 JSONObject participant = (JSONObject) participants.get(i);
 			 JSONObject stats = (JSONObject) participant.get("stats");
 			 Integer.parseInt(stats.get("magicDamageDealt").toString());
-			 participants.sort();
+			 //ChampionComparator a = new ChampionComparator();
+			 //participants.sort(a);
 		}
 		return topFour;
 	}
 	
-
+	
 }
+
