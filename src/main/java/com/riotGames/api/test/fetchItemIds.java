@@ -16,6 +16,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
+
 
 public class fetchItemIds {
 	//The main JSON - global variable(data source for the website)
@@ -23,19 +25,20 @@ public class fetchItemIds {
 	
 	public static void main(String[] args) {
 		
-		getItems("1852548676");
-		getItems("1852558827");
-		getItems("1852559208");
-		System.out.println(theJSON.toString());
-		for(Champion c: theJSON) {
-			System.out.println(c.getId());
-			System.out.println(c.getFreq());
-			for(Item i: c.getItems()) {
-				System.out.println("Item "+i.getId());
-				System.out.println("Frequency "+ i.getFreq());
-			}
-		}
-		/*JSONParser parser = new JSONParser();
+//		getItems("1852548676");
+//		getItems("1852558827");
+//		getItems("1852559208");
+//		System.out.println(theJSON.toString());
+//		for(Champion c: theJSON) {
+//			System.out.println(c.getId());
+//			System.out.println(c.getFreq());
+//			for(Item i: c.getItems()) {
+//				System.out.println("Item "+i.getId());
+//				System.out.println("Frequency "+ i.getFreq());
+//			}
+//		}
+		
+		JSONParser parser = new JSONParser();
 		Set<String> set511 = new HashSet<String>();
 		//Set<String> set514 = new HashSet<String>();
 		//Not using yet
@@ -47,21 +50,25 @@ public class fetchItemIds {
 			JSONArray JSON511 = (JSONArray) obj_511;
 			//JSONArray JSON514 = (JSONArray) obj_514;
 
-			for(int i = 0; i < 3; i++) {
+			for(int i = 0; i < JSON511.size(); i++) {
 				//System.out.println("MatchID 5.11 " + i+1 + " "+ JSON511.get(i));
-				set511.addAll(getItems(JSON511.get(i).toString()));
+				getItems(JSON511.get(i).toString());
+				
+				//set511.addAll(theJSON);
 			}
 			
-			FileWriter writer = new FileWriter("src/main/resources/output.txt"); 
-			for(String str: set511) {
-			  writer.write(str+"\n");
-			}
+			String json = new Gson().toJson(theJSON);
+			FileWriter writer = new FileWriter("src/main/resources/output.json"); 
+			writer.write(json);
+//			for(String str: set511) {
+//			  writer.write(str+"\n");
+//			}
 			writer.close();
 			System.out.println(set511.toString());
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		
 		
 	}
@@ -97,7 +104,6 @@ public class fetchItemIds {
 			String output;
 			//int freq;
 			
-			//MAIN SHIT!
 			while ((output = br.readLine()) != null) {
 				//RG API JSON 
 				json = (JSONObject)new JSONParser().parse(output);
@@ -118,6 +124,11 @@ public class fetchItemIds {
 						c.setItems(new ArrayList<Item>());
 						
 						stats = (JSONObject) participant.get("stats");
+						c.setKills(Integer.parseInt(stats.get("kills").toString()));
+						c.setDeaths(Integer.parseInt(stats.get("deaths").toString()));
+						if(Boolean.parseBoolean(stats.get("winner").toString())) {
+							c.setWins(1);
+						}
 						//List of items of a particular participant/new Champion
 						List<Item> listOfItems = new ArrayList<Item>();
 						for(int j = 0; j < 7; j++) {
@@ -133,6 +144,13 @@ public class fetchItemIds {
 							if(theJSON.get(j).getId().equals(participant.get("championId").toString())) {
 								stats = (JSONObject) participant.get("stats");
 								theJSON.get(j).setFreq(theJSON.get(j).getFreq()+1);
+								theJSON.get(j).setKills(Integer.parseInt(stats.get("kills").toString())+theJSON.get(j).getKills());
+								theJSON.get(j).setDeaths(Integer.parseInt(stats.get("deaths").toString())+theJSON.get(j).getDeaths());
+								
+								if(Boolean.parseBoolean(stats.get("winner").toString())) {
+									theJSON.get(j).setWins(theJSON.get(j).getWins()+1);
+								}
+								
 								for(int k = 0; k < 7 ; k++) {
 									for(int l = 0; l < theJSON.get(j).getItems().size(); l++) {
 										if(theJSON.get(j).getItems().get(l).getId() == Integer.parseInt(stats.get("item"+Integer.toString(k)).toString())) {
