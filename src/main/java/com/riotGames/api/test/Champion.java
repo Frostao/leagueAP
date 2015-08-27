@@ -5,7 +5,6 @@ import java.util.List;
 public class Champion {
 	private String id;
 	private int freq;
-	private int totalMagicDamageDealt;
 	private List<Item> items;
 	public String getId() {
 		return id;
