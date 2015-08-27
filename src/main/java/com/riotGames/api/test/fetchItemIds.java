@@ -25,6 +25,14 @@ public class fetchItemIds {
 		
 		getItems("1852548676");
 		System.out.println(theJSON.toString());
+		for(Champion c: theJSON) {
+			System.out.println(c.getId());
+			System.out.println(c.getFreq());
+			for(Item i: c.getItems()) {
+				System.out.println("Item "+i.getId());
+				System.out.println("Frequency "+ i.getFreq());
+			}
+		}
 		/*JSONParser parser = new JSONParser();
 		Set<String> set511 = new HashSet<String>();
 		//Set<String> set514 = new HashSet<String>();
@@ -155,8 +163,9 @@ public class fetchItemIds {
 	
 	private static int compare(JSONObject o1, JSONObject o2) {
 		// TODO Auto-generated method stub
-		int magicD1 = Integer.parseInt(o1.get("magicDamageDealt").toString());
-		int magicD2 = Integer.parseInt(o2.get("magicDamageDealt").toString());
+		
+		int magicD1 = Integer.parseInt(((JSONObject)o1.get("stats")).get("magicDamageDealt").toString());
+		int magicD2 = Integer.parseInt(((JSONObject)o2.get("stats")).get("magicDamageDealt").toString());
 		if (magicD1 > magicD2) {
 			return 1;
 		} else {
@@ -174,7 +183,7 @@ public class fetchItemIds {
 		while (swapped) {
 			swapped = false;
 			j++;
-			for (int i = 0; i < participants.size() - j; i++) {                                       
+			for (int i = 0; i < participants.size() - j; i++) {   
 				if (compare((JSONObject)participants.get(i), (JSONObject)participants.get(i+1)) < 0) {                          
 					tmp = (JSONObject)participants.get(i);
 					participants.set(i, participants.get(i+1));
