@@ -1,0 +1,24 @@
+{
+  "name": "express-server-tmpl",
+  "version": "1.0.0",
+  "description": "Express server for NodeJS template",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.13.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kbravo/express-server-tmpl.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kbravo/express-server-tmpl/issues"
+  },
+  "homepage": "https://github.com/kbravo/express-server-tmpl#readme"
+}
