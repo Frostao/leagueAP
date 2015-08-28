@@ -43,7 +43,7 @@ public class fetchItemIds {
 		//Set<String> set514 = new HashSet<String>();
 		//Not using yet
 		try {
-			Object obj_511 = parser.parse(new FileReader("src/main/resources/NA_5.11.json"));
+			Object obj_511 = parser.parse(new FileReader("src/main/resources/AP_ITEM_DATASET/5.14/RANKED_SOLO/NA.json"));
 			
 			//Object obj_514 = parser.parse(new FileReader("src/main/resources/NA_5.14.json"));
 			
@@ -58,7 +58,7 @@ public class fetchItemIds {
 			}
 			
 			String json = new Gson().toJson(theJSON);
-			FileWriter writer = new FileWriter("src/main/resources/output.json"); 
+			FileWriter writer = new FileWriter("src/main/resources/responses/NA5.14Ranked.json"); 
 			writer.write(json);
 //			for(String str: set511) {
 //			  writer.write(str+"\n");
