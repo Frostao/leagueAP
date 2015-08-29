@@ -1,0 +1,30 @@
+<div ng-controller="compareController">
+	<div style="color: #FFFFFF;"class="container">
+		<h2>5.11 Dataset</h2>
+
+		<div class="table-responsive">          
+			<table class="table">
+				<thead>
+				  <tr>
+				    <th></th>
+				    <th>Champion</th>
+				    <th>Average Kills</th>
+				    <th>Wins Rate</th>
+				    <th>Average Death</th>
+				    <th>Popular Items</th>
+				  </tr>
+				</thead>
+				<tbody ng-repeat="item in allData">
+				  <tr>
+				    <td>{{item.id}}</td>
+				    <td></td>
+				    <td>{{(item.kills/item.freq).toFixed(1)}}</td>
+				    <td>{{ ((item.wins*100/item.freq).toFixed(2)) }}%</td>
+				    <td>{{(item.deaths/item.freq).toFixed(1)}}</td>
+				    <td></td>
+				  </tr>
+				</tbody>
+			</table>
+  		</div>
+	</div>
+</div>

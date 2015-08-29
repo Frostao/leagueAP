@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html ng-app="leagueApp">
 <head>
-	<title>Ola</title>
+	<title>leagueAP</title>
 	<script type="text/javascript" src="third_party/jquery/dist/jquery.js"></script>
 	<link rel="stylesheet" type="text/css" href="third_party/bootstrap/dist/css/bootstrap.css">
 	<script type="text/javascript" src="third_party/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -10,12 +10,42 @@
 	<script type="text/javascript" src="third_party/angular-route/angular-route.js"></script>
 	<script type="text/javascript" src="third_party/angular-ui-bootstrap/src/typeahead/typeahead.js"></script>
 
-	<script type="text/javascript" src="js/src/component/controller.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/core.css">
+	<script type="text/javascript" src="app.js"></script>
 
 </head>
-<body ng-controller="appController">
-<h1>It works! {{"Angular working!"}}</h1>
+<body>
+	<div class="row">
+	  <div class="col-sm-5"></div>
+	  <div class="col-sm-4"></div>
+	  <div class="col-sm-3">
+	  	<img src="img/league_logo.png" height="90" width="190">
+	  </div>
+	</div>
+<!-- HEADER AND NAVBAR -->
+	<div class="row">
+    <header>
+        <nav class="navbar transparent navbar-inverse navbar-inner navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/">LeagueAP</a>
+            </div>
 
-<button class="btn btn-danger">Bootstrap working! </button>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="#/compare"><i class="fa fa-shield"></i> Compare</a></li>
+                <li><a href="#/author"><i class="fa fa-comment"></i> Authors</a></li>
+            </ul>
+        </div>
+        </nav>
+    </header>
+    </div>
+
+	<div id="main">
+		 <div ng-view></div>
+            <!-- angular templating -->
+            <!-- this is where content will be injected -->
+
+    </div>
 </body>
 </html>

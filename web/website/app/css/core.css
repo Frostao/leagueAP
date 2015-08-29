@@ -1,3 +1,15 @@
-h1 {
-	background-color: red;
+body {
+	background: url("spirit.gif") no-repeat center center fixed;
+    -webkit-background-size: cover; /* For WebKit*/
+    -moz-background-size: cover;    /* Mozilla*/
+    -o-background-size: cover;      /* Opera*/
+    background-size: cover;         /* Generic*/
+}
+
+#main {
+	margin:0px 385px;
+}
+
+.navbar.transparent.navbar-inverse .navbar-inner {
+   background: rgba(0,0,0,0.9);
 }
