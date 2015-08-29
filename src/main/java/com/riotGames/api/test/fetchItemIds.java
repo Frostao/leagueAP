@@ -96,10 +96,10 @@ public class fetchItemIds {
 			conn.setRequestProperty("Accept", "application/json");
 
 			if (conn.getResponseCode() != 200) {
-				if (conn.getResponseCode() == 429) {
-					errors++;
-					getItems(matchId);
-				}
+				
+				errors++;
+				getItems(matchId);
+				
 				throw new RuntimeException("Failed : HTTP error code : "
 						+ conn.getResponseCode() + "error No." + errors);
 			}
