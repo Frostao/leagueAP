@@ -44,7 +44,7 @@ public class fetchItemIds {
 		//Set<String> set514 = new HashSet<String>();
 		//Not using yet
 		try {
-			Object obj_511 = parser.parse(new FileReader("src/main/resources/AP_ITEM_DATASET/5.11/RANKED_SOLO/EUW.json"));
+			Object obj_511 = parser.parse(new FileReader("src/main/resources/AP_ITEM_DATASET/5.11/RANKED_SOLO/KR.json"));
 			
 			//Object obj_514 = parser.parse(new FileReader("src/main/resources/NA_5.14.json"));
 			
@@ -59,7 +59,7 @@ public class fetchItemIds {
 			}
 			
 			String json = new Gson().toJson(theJSON);
-			FileWriter writer = new FileWriter("src/main/resources/responses/EUW5.11RANKED.json"); 
+			FileWriter writer = new FileWriter("src/main/resources/responses/KR5.11RANKED.json"); 
 			writer.write(json);
 //			for(String str: set511) {
 //			  writer.write(str+"\n");
@@ -90,7 +90,7 @@ public class fetchItemIds {
 		//List<String> listItems = new ArrayList<String>();
 		try {
 			//Getting the data from the RG API
-			URL url = new URL("https://euw.api.pvp.net/api/lol/euw/v2.2/match/" + matchId + "?api_key=" + authKey);
+			URL url = new URL("https://kr.api.pvp.net/api/lol/kr/v2.2/match/" + matchId + "?api_key=" + authKey);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
