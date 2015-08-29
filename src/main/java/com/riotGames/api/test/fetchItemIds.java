@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 public class fetchItemIds {
 	//The main JSON - global variable(data source for the website)
 	static ArrayList<Champion> theJSON = new ArrayList<Champion>();
+	static int errors;
 	
 	public static void main(String[] args) {
 		
@@ -43,7 +44,7 @@ public class fetchItemIds {
 		//Set<String> set514 = new HashSet<String>();
 		//Not using yet
 		try {
-			Object obj_511 = parser.parse(new FileReader("src/main/resources/AP_ITEM_DATASET/5.14/RANKED_SOLO/NA.json"));
+			Object obj_511 = parser.parse(new FileReader("src/main/resources/AP_ITEM_DATASET/5.11/RANKED_SOLO/EUW.json"));
 			
 			//Object obj_514 = parser.parse(new FileReader("src/main/resources/NA_5.14.json"));
 			
@@ -58,7 +59,7 @@ public class fetchItemIds {
 			}
 			
 			String json = new Gson().toJson(theJSON);
-			FileWriter writer = new FileWriter("src/main/resources/responses/NA5.14Ranked.json"); 
+			FileWriter writer = new FileWriter("src/main/resources/responses/EUW5.11RANKED.json"); 
 			writer.write(json);
 //			for(String str: set511) {
 //			  writer.write(str+"\n");
@@ -89,14 +90,18 @@ public class fetchItemIds {
 		//List<String> listItems = new ArrayList<String>();
 		try {
 			//Getting the data from the RG API
-			URL url = new URL("https://na.api.pvp.net/api/lol/na/v2.2/match/" + matchId + "?api_key=" + authKey);
+			URL url = new URL("https://euw.api.pvp.net/api/lol/euw/v2.2/match/" + matchId + "?api_key=" + authKey);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
 
 			if (conn.getResponseCode() != 200) {
+				if (conn.getResponseCode() == 429) {
+					errors++;
+					getItems(matchId);
+				}
 				throw new RuntimeException("Failed : HTTP error code : "
-						+ conn.getResponseCode());
+						+ conn.getResponseCode() + "error No." + errors);
 			}
 
 			BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
