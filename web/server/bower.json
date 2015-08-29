@@ -1,0 +1,21 @@
+{
+  "name": "express-server-tmpl",
+  "version": "0.0.0",
+  "homepage": "https://github.com/kbravo/express-server-tmpl",
+  "authors": [
+    "Kartik Yadav"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/third_party/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.2",
+    "bootstrap": "~3.3.5"
+  }
+}
