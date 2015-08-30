@@ -6,10 +6,12 @@ body {
     background-size: cover;         /* Generic*/
 }
 
-#main {
-	margin:0px 385px;
-}
-
 .navbar.transparent.navbar-inverse .navbar-inner {
    background: rgba(0,0,0,0.9);
+}
+
+#allData {
+	width: 1200px;
+    height: 1000px;
+    overflow: scroll;
 }
