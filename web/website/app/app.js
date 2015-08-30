@@ -49,13 +49,13 @@ app.controller('compareController', ['$scope', '$http', '$filter', function($sco
 
     // create a message to display in our view
     $scope.getAllLeagueAPData = function() {
-        $http.get('http://ddragon.leagueoflegends.com/cdn/5.2.1/data/en_US/champion.json').
+        $http.get('http://ddragon.leagueoflegends.com/cdn/5.16.1/data/en_US/champion.json').
           then(function(response) {
             $scope.allChampions = angular.fromJson(response.data.data);
             angular.forEach($scope.allChampions, function(item){
                 var champ = new ChampionData();
                 champ.name = item.id;
-                champ.image = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/"+item.id+".png";
+                champ.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
                 $http.get('http://localhost:7001/api/champion/id/'+item.key).
                   then(function(response) {
                     champ.id = response.data.id;
