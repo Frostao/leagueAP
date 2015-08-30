@@ -11,30 +11,4 @@ body {
 }
 
 #allData {
-	width: 1200px;
-    height: 1000px;
-    overflow: scroll;
 }
-
-.nav3 {
-    background-color: #E9E8C7;
-    height: auto;
-    width: 150px;
-    float: left;
-    padding-left: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    color: #333333;
-    padding-top: 20px;
-    padding-right: 20px;
-}
-
-.icons{
-    display:inline-block;
-    width: 64px; 
-    height: 64px; 
-   }
-
- a.icons:hover {
-     background: #C93;
- }

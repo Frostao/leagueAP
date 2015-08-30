@@ -5,10 +5,10 @@ var app = angular.module('leagueApp', ['ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
          .when('/', {
-            templateUrl : 'js/src/splash/splash-tmpl.html',
-            controller  : 'splashController'
+            templateUrl : 'js/src/compare/compare-tmpl.html',
+            controller  : 'compareController'
         })
-        .when('/author', {
+        .when('/about', {
             templateUrl : 'js/src/authors/authors-tmpl.html',
             controller  : 'authorsController'
         })
@@ -56,7 +56,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', function($sco
                 var champ = new ChampionData();
                 champ.name = item.id;
                 champ.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
-                $http.get('http://localhost:7001/api/champion/id/'+item.key).
+                $http.get('http://128.211.242.21:7001/api/champion/id/'+item.key).
                   then(function(response) {
                     champ.id = response.data.id;
                     champ.freq = response.data.freq;

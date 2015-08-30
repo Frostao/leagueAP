@@ -1,6 +1,6 @@
 <div ng-controller="compareController">	
 	<div style="color: #FFFFFF;"class="container">
-		<h2>5.11 Dataset</h2>
+		<h2>Patch 5.11</h2>
 		<div class="container-fluid" id="allData">
 			<div class="table-responsive">          
 				<table class="table">
@@ -13,12 +13,20 @@
 					    <th><a href="" ng-click="reverse=false;order('averagekills', false)">Average Kills</a>
 					    	(<a href="" ng-click="order('-averagekills',false)">^</a>)
 					    </th>
-						<th><a href="" ng-click="reverse=false;order('winrate', false)">Wins Rate %</a>
+						<th><a href="" ng-click="reverse=false;order('winrate', false)">Win Rate</a>
 							(<a href="" ng-click="order('-winrate',false)">^</a>)
 						</th>			
-						<th><a href="" ng-click="reverse=false;order('averagedeaths', false)">Average Death</a>
-							(<a href="" ng-click="order('-averagedeaths',false)">^</a>)
-						</th>
+					    <th>Popular Items</th>
+					    <th></th>
+					    <th><a href="" ng-click="reverse=false;order('name', false)">Champion</a>
+					    	(<a href="" ng-click="order('-name',false)">^</a>)
+					    </th>
+					    <th><a href="" ng-click="reverse=false;order('averagekills', false)">Average Kills</a>
+					    	(<a href="" ng-click="order('-averagekills',false)">^</a>)
+					    </th>
+						<th><a href="" ng-click="reverse=false;order('winrate', false)">Win Rate</a>
+							(<a href="" ng-click="order('-winrate',false)">^</a>)
+						</th>			
 					    <th>Popular Items</th>
 					  </tr>
 					</thead>
@@ -28,26 +36,29 @@
 					    <td>{{item.name}}</td>
 					    <td>{{item.averagekills}}</td>
 					    <td>{{item.winrate}}</td>
-					    <td>{{item.averagedeaths}}</td>
 					    <td>
 					    	<div class="row">
-						    	<div class="col-sm-2">
-						    		<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[0].id+".png"}} class="img-responsive" height="40" width="40">
+						    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[0].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+						    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[1].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+						    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[2].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+						    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[3].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+						    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[4].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+						    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[5].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
 						    	</div>
-						    	<div class="col-sm-2">
-						    		<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[1].id+".png"}} class="img-responsive" height="40" width="40">
-						    	</div>
-						    	<div class="col-sm-2">
-						    		<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[2].id+".png"}} class="img-responsive" height="40" width="40">
-						    	</div>
-						    	<div class="col-sm-2">
-						    		<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[3].id+".png"}} class="img-responsive" height="40" width="40">
-						    	</div>
-						    	<div class="col-sm-2">
-						    		<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[4].id+".png"}} class="img-responsive" height="40" width="40">
-						    	</div>
-						    	<div class="col-sm-2">
-						    		<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[5].id+".png"}} class="img-responsive" height="40" width="40">
+					    	</div>
+					    </td>
+					    <td><img src={{item.image}} class="img-responsive img-circle" height="80" width="80"></td>
+					    <td>{{item.name}}</td>
+					    <td>{{item.averagekills}}</td>
+					    <td>{{item.winrate}}</td>
+					    <td>
+					    	<div class="row">
+						    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[0].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+						    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[1].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+						    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[2].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+						    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[3].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+						    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[4].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+						    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[5].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
 						    	</div>
 					    	</div>
 					    </td>
