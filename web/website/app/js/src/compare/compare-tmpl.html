@@ -1,17 +1,24 @@
-<div ng-controller="compareController">
+<div ng-controller="compareController">	
 	<div style="color: #FFFFFF;"class="container">
 		<h2>5.11 Dataset</h2>
-
 		<div class="container-fluid" id="allData">
 			<div class="table-responsive">          
 				<table class="table">
 					<thead>
 					  <tr>
 					    <th></th>
-					    <th>Champion</th>
-					    <th>Average Kills</th>
-					    <th>Wins Rate</th>
-					    <th>Average Death</th>
+					    <th><a href="" ng-click="reverse=false;order('name', false)">Champion</a>
+					    	(<a href="" ng-click="order('-name',false)">^</a>)
+					    </th>
+					    <th><a href="" ng-click="reverse=false;order('averagekills', false)">Average Kills</a>
+					    	(<a href="" ng-click="order('-averagekills',false)">^</a>)
+					    </th>
+						<th><a href="" ng-click="reverse=false;order('winrate', false)">Wins Rate %</a>
+							(<a href="" ng-click="order('-winrate',false)">^</a>)
+						</th>			
+						<th><a href="" ng-click="reverse=false;order('averagedeaths', false)">Average Death</a>
+							(<a href="" ng-click="order('-averagedeaths',false)">^</a>)
+						</th>
 					    <th>Popular Items</th>
 					  </tr>
 					</thead>
@@ -19,10 +26,31 @@
 					  <tr>
 					    <td><img src={{item.image}} class="img-responsive img-circle" height="80" width="80"></td>
 					    <td>{{item.name}}</td>
-					    <td>{{(item.kills/item.freq).toFixed(1)}}</td>
-					    <td>{{ ((item.wins*100/item.freq).toFixed(2)) }}%</td>
-					    <td>{{(item.deaths/item.freq).toFixed(1)}}</td>
-					    <td></td>
+					    <td>{{item.averagekills}}</td>
+					    <td>{{item.winrate}}</td>
+					    <td>{{item.averagedeaths}}</td>
+					    <td>
+					    	<div class="row">
+						    	<div class="col-sm-2">
+						    		<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[0].id+".png"}} class="img-responsive" height="40" width="40">
+						    	</div>
+						    	<div class="col-sm-2">
+						    		<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[1].id+".png"}} class="img-responsive" height="40" width="40">
+						    	</div>
+						    	<div class="col-sm-2">
+						    		<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[2].id+".png"}} class="img-responsive" height="40" width="40">
+						    	</div>
+						    	<div class="col-sm-2">
+						    		<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[3].id+".png"}} class="img-responsive" height="40" width="40">
+						    	</div>
+						    	<div class="col-sm-2">
+						    		<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[4].id+".png"}} class="img-responsive" height="40" width="40">
+						    	</div>
+						    	<div class="col-sm-2">
+						    		<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[5].id+".png"}} class="img-responsive" height="40" width="40">
+						    	</div>
+					    	</div>
+					    </td>
 					  </tr>
 					</tbody>
 				</table>
@@ -31,3 +59,5 @@
 
 	</div>
 </div>
+
+"reverse=!reverse;order('phone', reverse)"

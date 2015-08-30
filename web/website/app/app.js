@@ -21,8 +21,9 @@ app.config(function($routeProvider) {
         });
 });
 
-app.controller('compareController', ['$scope', '$http', function($scope, $http) {
+app.controller('compareController', ['$scope', '$http', '$filter', function($scope, $http, $filter) {
     'use strict';
+    var orderBy = $filter('orderBy');
     /*var ChampionData = {
         name : null,
         image: null,
@@ -38,9 +39,9 @@ app.controller('compareController', ['$scope', '$http', function($scope, $http) 
         this.image = null;
         this.id = 0;
         this.freq = 0;
-        this.wins = 0;
-        this.kills = 0;
-        this.deaths = 0;
+        this.winrate = 0;
+        this.averagekills = 0;
+        this.averagedeaths = 0;
         this.items = [];
     }
     $scope.allData = []
@@ -59,9 +60,9 @@ app.controller('compareController', ['$scope', '$http', function($scope, $http) 
                   then(function(response) {
                     champ.id = response.data.id;
                     champ.freq = response.data.freq;
-                    champ.wins = response.data.wins;
-                    champ.kills = response.data.kills;
-                    champ.deaths = response.data.deaths;
+                    champ.winrate = ((response.data.wins*100)/response.data.freq).toFixed(2);
+                    champ.averagekills = (response.data.kills/response.data.freq).toFixed(1);
+                    champ.averagedeaths = (response.data.deaths/response.data.freq).toFixed(1);
                     champ.items = response.data.items;
                     $scope.allData.push(champ);
                   }, function(response) {
@@ -70,9 +71,21 @@ app.controller('compareController', ['$scope', '$http', function($scope, $http) 
             })
           }, function(response) {
             console.log(response.data);
-          });    
+          });   
     }
+    /*$scope.sortAllData = function() {
+        $scope.allData.sort(function(a, b) { 
+            return a.name.toUpperCase().localeCompare(b.name.toUpperCase());
+        })
+        $(window).load(function(){
+            $scope.order('name',false);
+        });
+    }*/
     $scope.getAllLeagueAPData();
+
+    $scope.order = function(predicate, reverse) {
+        $scope.allData = orderBy($scope.allData, predicate, reverse);
+    };  
 }]);
 //http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/Aatrox.png
 app.controller('authorsController', function($scope) {
