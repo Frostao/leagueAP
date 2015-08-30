@@ -4,3 +4,4 @@
 /.gradle/*
 .classpath
 .DS_Store
+/web/server/.DS_Store

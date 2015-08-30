@@ -34,6 +34,9 @@ app.get('/api/champion/id/:champId', function(req, res) {
 	var champId = req.params.champId;
 	for(i = 0; i < 122; i++){
     	if(json[i].id === champId) {
+            json[i].items.sort(function(a, b) { 
+                return b.freq - a.freq;
+            })
     		res.json(json[i]);
     	}
 	}
