@@ -46,6 +46,13 @@ app.controller('compareController', ['$scope', '$http', '$filter', function($sco
     }
     $scope.allData = []
     $scope.allChampions = {}
+    $scope.currentChampion = {}
+    $scope.currentHeader = null;
+
+    $scope.getChampionData = function(id, name) {
+        console.log(id);
+        $scope.currentHeader = name;
+    }
 
     // create a message to display in our view
     $scope.getAllLeagueAPData = function() {
