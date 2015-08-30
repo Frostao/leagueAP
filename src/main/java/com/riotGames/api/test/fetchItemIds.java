@@ -60,6 +60,7 @@ public class fetchItemIds {
 			
 			String json = new Gson().toJson(theJSON);
 			FileWriter writer = new FileWriter("src/main/resources/responses/KR5.11Normal.json"); 
+
 			writer.write(json);
 //			for(String str: set511) {
 //			  writer.write(str+"\n");
