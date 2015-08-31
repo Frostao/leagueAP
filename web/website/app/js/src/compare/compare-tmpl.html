@@ -95,14 +95,16 @@
 	      <div class="modal-body">
 	      	<!-- Get currentChampion data to be presented over here use the object within these to access it{{}} !-->
 	        <img src={{"http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+currentChampionData.name+"_0.jpg"}} class="img-responsive" height="1500" width="900" style="display: inline;">
-	        <p>Average Kills: {{currentChampionData.averagekills}}</p>
-	        <p>Average Deaths: {{currentChampionData.averagedeath}}</p>
-	        <p>Win rate: {{currentChampionData.winrate}}%</p>
-	        <p>Amount of champion data used for this champion: {{currentChampionData.freq}}</p>
-	   		<h5>Items - </h5>
-	        <div ng-repeat="item in currentChampionData.items">
-	        	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.14.1/img/item/"+item.id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
-	        	<figcaption style="font-size:xx-small;">{{item.freq}}</figcaption>
+	        <div style="text-align: center">
+		        <p><b>Average Kills:&nbsp; {{currentChampionData.averagekills}}</p>
+		        <p>Average Deaths:&nbsp;  {{currentChampionData.averagedeaths}}</p>
+		        <p>Win rate:&nbsp;  {{currentChampionData.winrate}}%</p>
+		        <p>Amount of champion data used for this champion:&nbsp;  {{currentChampionData.freq}}</b></p>
+	        </div>
+	   		<h5>Items </h5>
+	        <div class="row">
+	        	<span style="padding-left: 15px; display: inline-block;" ng-repeat="item in currentChampionData.items"><img src={{"http://ddragon.leagueoflegends.com/cdn/5.14.1/img/item/"+item.id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+	        	<figcaption style="font-size:xx-small;">{{item.freq}}</figcaption></span>
 	        </div>
 
 	      </div>

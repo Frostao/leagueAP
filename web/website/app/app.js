@@ -21,7 +21,7 @@ app.config(function($routeProvider) {
         });
 });
 
-app.controller('compareController', ['$scope', '$http', '$filter', function($scope, $http, $filter) {
+app.controller('compareController', ['$scope', '$http', '$filter', '$window', function($scope, $http, $filter, $window) {
     'use strict';
     var orderBy = $filter('orderBy');
     $scope.currentChampionData = {
@@ -71,13 +71,15 @@ app.controller('compareController', ['$scope', '$http', '$filter', function($sco
                 champ.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
                 $http.get('http://128.211.242.21:7001/api/NA5.11N/champion/id/'+item.key).
                   then(function(response) {
-                    champ.id = response.data.id;
-                    champ.freq = response.data.freq;
-                    champ.winrate = ((response.data.wins*100)/response.data.freq).toFixed(2);
-                    champ.averagekills = (response.data.kills/response.data.freq).toFixed(1);
-                    champ.averagedeaths = (response.data.deaths/response.data.freq).toFixed(1);
-                    champ.items = response.data.items;
-                    $scope.allData.push(champ);
+                    if(!(response.data === "Not Found")) {
+                        champ.id = response.data.id;
+                        champ.freq = response.data.freq;
+                        champ.winrate = ((response.data.wins*100)/response.data.freq).toFixed(2);
+                        champ.averagekills = (response.data.kills/response.data.freq).toFixed(1);
+                        champ.averagedeaths = (response.data.deaths/response.data.freq).toFixed(1);
+                        champ.items = response.data.items;
+                        $scope.allData.push(champ);
+                    }
                   }, function(response) {
                     console.log(response.data);
                   }); 
@@ -88,13 +90,15 @@ app.controller('compareController', ['$scope', '$http', '$filter', function($sco
                 champ514.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
                 $http.get('http://128.211.242.21:7001/api/NA5.14N/champion/id/'+item.key).
                   then(function(response) {
-                    champ514.id = response.data.id;
-                    champ514.freq = response.data.freq;
-                    champ514.winrate = ((response.data.wins*100)/response.data.freq).toFixed(2);
-                    champ514.averagekills = (response.data.kills/response.data.freq).toFixed(1);
-                    champ514.averagedeaths = (response.data.deaths/response.data.freq).toFixed(1);
-                    champ514.items = response.data.items;
-                    $scope.allData514.push(champ514);
+                    if(!(response.data === "Not Found")) {
+                        champ514.id = response.data.id;
+                        champ514.freq = response.data.freq;
+                        champ514.winrate = ((response.data.wins*100)/response.data.freq).toFixed(2);
+                        champ514.averagekills = (response.data.kills/response.data.freq).toFixed(1);
+                        champ514.averagedeaths = (response.data.deaths/response.data.freq).toFixed(1);
+                        champ514.items = response.data.items;
+                        $scope.allData514.push(champ514);
+                    }
                   }, function(response) {
                     console.log(response.data);
                   }); 
@@ -103,14 +107,23 @@ app.controller('compareController', ['$scope', '$http', '$filter', function($sco
             console.log(response.data);
           });   
     }
-    /*$scope.sortAllData = function() {
+    $scope.sortAllData = function() {
         $scope.allData.sort(function(a, b) { 
             return a.name.toUpperCase().localeCompare(b.name.toUpperCase());
         })
         $(window).load(function(){
             $scope.order('name',false);
         });
-    }*/
+    }
+
+    $scope.sortAllData514 = function() {
+        $scope.allData514.sort(function(a, b) { 
+            return a.name.toUpperCase().localeCompare(b.name.toUpperCase());
+        })
+        $(window).load(function(){
+            $scope.order514('name',false);
+        });
+    }
     $scope.getAllLeagueAPData();
 
     $scope.order = function(predicate, reverse) {
