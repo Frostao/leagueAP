@@ -164,7 +164,7 @@ app.get('/api/KR5.11R/champion/id/:champId', function(req, res) {
 });
 
 
-app.get('/api/EUW5.14R/champion/id/:champId', function(req, res) {
+app.get('/api/EUW5.14N/champion/id/:champId', function(req, res) {
     json = getStaticJSON('KR5.14RANKED.json');
     var champId = req.params.champId;
     for(i = 0; i < json.length; i++){

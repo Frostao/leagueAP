@@ -24,7 +24,7 @@ app.config(function($routeProvider) {
 app.controller('compareController', ['$scope', '$http', '$filter', '$window', function($scope, $http, $filter, $window) {
     'use strict';
     var orderBy = $filter('orderBy');
-    
+
 
 
     $scope.currentChampionData = {
@@ -74,7 +74,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
         } else if(item.apiVersion == 5.14) {
             $scope.currentChampionData.apiVersion_2 = 5.11
         }
-        $http.get('http://128.211.242.21:7001/api/NA'+$scope.currentChampionData.apiVersion_2+'N/champion/id/'+item.id).
+        $http.get('http://128.211.242.21:7001/api/EUW'+$scope.currentChampionData.apiVersion_2+'R/champion/id/'+item.id).
           then(function(response) {
             if(!(response.data === "Not Found")) {
                 $scope.currentChampionData.freq_2 = response.data.freq;
@@ -108,7 +108,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
                     champ.name = "Wu Kong";
                 }
                 champ.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
-                $http.get('http://128.211.242.21:7001/api/NA5.11N/champion/id/'+item.key).
+                $http.get('http://128.211.242.21:7001/api/EUW5.11N/champion/id/'+item.key).
                   then(function(response) {
                     champ.id = response.data.id;
                     if(!(response.data === "Not Found")) {
@@ -139,7 +139,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
                     champ514.name = "Wu Kong";
                 }
                 champ514.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
-                $http.get('http://128.211.242.21:7001/api/NA5.14N/champion/id/'+item.key).
+                $http.get('http://128.211.242.21:7001/api/EUW5.14N/champion/id/'+item.key).
                   then(function(response) {
                     champ514.id = response.data.id;
                     if(!(response.data === "Not Found")) {
