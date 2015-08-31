@@ -22,8 +22,8 @@
 						</thead>
 						<tbody ng-repeat="item in allData">
 						  <tr>
-						    <td><a ng-click="getChampionData(item.id,item.name)" data-toggle="modal" data-target="#myModal" href=""> <img src={{item.image}} class="img-responsive img-circle" height="80" width="80"></a></td>
-						    <td><a ng-click="getChampionData(item.id,item.name)" data-toggle="modal" data-target="#myModal" href="">{{item.name}}</a></td>
+						    <td><a ng-click="getChampionData(item.name, item.freq, item.winrate, item.averagekills, item.averagedeaths, item.items)" data-toggle="modal" data-target="#myModal" href=""> <img src={{item.image}} class="img-responsive img-circle" height="80" width="80"></a></td>
+						    <td><a ng-click="getChampionData(item.name, item.freq, item.winrate, item.averagekills, item.averagedeaths, item.items)" data-toggle="modal" data-target="#myModal" href="">{{item.name}}</a></td>
 						    <td>{{item.averagekills}}</td>
 						    <td>{{item.winrate}}</td>
 						    <td>
@@ -62,8 +62,8 @@
 						</thead>
 						<tbody ng-repeat="item in allData514">
 						  <tr>
-						    <td><a ng-click="getChampionData(item.id,item.name)" data-toggle="modal" data-target="#myModal" href=""> <img src={{item.image}} class="img-responsive img-circle" height="80" width="80"> </a></td>
-						    <td><a ng-click=""data-toggle="modal" data-target="#myModal" href="">{{item.name}}</a></td>
+						    <td><a ng-click="getChampionData(item.name, item.freq, item.winrate, item.averagekills, item.averagedeaths, item.items)" data-toggle="modal" data-target="#myModal" href=""> <img src={{item.image}} class="img-responsive img-circle" height="80" width="80"> </a></td>
+						    <td><a ng-click="getChampionData(item.name, item.freq, item.winrate, item.averagekills, item.averagedeaths, item.items)"data-toggle="modal" data-target="#myModal" href="">{{item.name}}</a></td>
 						    <td>{{item.averagekills}}</td>
 						    <td>{{item.winrate}}</td>
 						    <td>
@@ -95,7 +95,10 @@
 	      <div class="modal-body">
 	      	<!-- Get currentChampion data to be presented over here use the object within these to access it{{}} !-->
 	        <img src={{"http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+currentHeader+"_0.jpg"}} class="img-responsive" height="1500" width="900" style="display: inline;">
-	        <p>Average Kills: </p>
+	        <p>Average Kills: {{averagekills}}</p>
+	        <p>Average Deaths: {{averagedeath}}</p>
+	        <p>Win rate: {{winrate}}</p>
+	        <p>Amount of champion data used for this champion: {{freq}}</p>
 
 	      </div>
 	      <div class="modal-footer">

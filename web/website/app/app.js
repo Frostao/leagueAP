@@ -50,13 +50,14 @@ app.controller('compareController', ['$scope', '$http', '$filter', function($sco
     $scope.currentChampion = {}
     $scope.currentHeader = null;
 
-    $scope.getChampionData = function(name, freq, winrate, averagekills, averagedeaths) {
+    $scope.getChampionData = function(name, freq, winrate, averagekills, averagedeaths, items) {
         console.log(id);
         $scope.currentHeader = name;
         $scope.freq = freq;
         $scope.winrate = winrate;
         $scope.averagekills = averagekills;
         $scope.averagedeaths = averagedeaths;
+        $scope.items = items;
         
     }
 
