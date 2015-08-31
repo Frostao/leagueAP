@@ -32,7 +32,14 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
         winrate : 0,
         averagekills : 0,
         averagedeaths : 0,
-        items : []
+        items : [],
+        freq_2 : 0,
+        winrate_2 : 0,
+        averagekills_2 : 0,
+        averagedeaths_2 : 0,
+        items_2 : [],
+        apiVersion: 0,
+        apiVersion_2: 0
     }
     function ChampionData () {
         this.name = null;
@@ -43,7 +50,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
         this.averagekills = 0;
         this.averagedeaths = 0;
         this.items = [];
-        this.apiVersion = 5.11;
+        this.apiVersion = 0;
     }
     $scope.allData = []
     $scope.allData514 = []
@@ -59,7 +66,23 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
         $scope.currentChampionData.averagedeaths = item.averagedeaths;
         $scope.currentChampionData.items = item.items;
         $scope.currentChampionData.apiVersion = item.apiVersion;
-        
+        if(item.apiVersion = 5.11) {
+            $scope.currentChampionData.apiVersion_2 = 5.14
+        } else if(item.apiVersion = 5.14) {
+            $scope.currentChampionData.apiVersion_2 = 5.11
+        }
+        $http.get('http://128.211.242.21:7001/api/NA'+$scope.currentChampionData.apiVersion_2+'N/champion/id/'+item.id).
+          then(function(response) {
+            if(!(response.data === "Not Found")) {
+                $scope.currentChampionData.freq_2 = response.data.freq;;
+                $scope.currentChampionData.winrate_2 = ((response.data.wins*100)/response.data.freq).toFixed(2);
+                $scope.currentChampionData.averagekills_2 = (response.data.kills/response.data.freq).toFixed(1);
+                $scope.currentChampionData.averagedeaths_2 = (response.data.deaths/response.data.freq).toFixed(1);
+                $scope.currentChampionData.items_2 = response.data.items;
+            }
+          }, function(response) {
+            console.log(response.data);
+          });  
     }
 
     // create a message to display in our view

@@ -62,7 +62,7 @@
 						</thead>
 						<tbody ng-repeat="item in allData514">
 						  <tr>
-						    <td><a ng-click="getChampionData(item)" data-toggle="modal" data-target="#myModal" href=""> <img src={{item.image}} class="img-responsive img-circle" height="80" width="80"> </a></td>
+						    <td><a ng-click="getChampionData(item, allData[$index])" data-toggle="modal" data-target="#myModal" href=""> <img src={{item.image}} class="img-responsive img-circle" height="80" width="80"> </a></td>
 						    <td><a ng-click="getChampionData(item)"data-toggle="modal" data-target="#myModal" href="">{{item.name}}</a></td>
 						    <td>{{item.averagekills}}</td>
 						    <td>{{item.winrate}}</td>
@@ -97,22 +97,22 @@
 	        <img src={{"http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+currentChampionData.name+"_0.jpg"}} class="img-responsive" height="1500" width="900" style="display: inline;">
 
 	        <div style="text-align: center">
-    			<div class="col-lg-6"><p>Patch 5.11</p></div>
-    			<div class="col-lg-6"><p>Patch 5.14</p></div>
+    			<div class="col-lg-6"><p>Patch {{currentChampionData.apiVersion}}</p></div>
+    			<div class="col-lg-6"><p>Patch {{currentChampionData.apiVersion_2}}</p></div>
  		        <div class="col-lg-6"><p><b>Average Kills:&nbsp; {{currentChampionData.averagekills}}</p></div>
- 		        <div class="col-lg-6"><p><b>Average Kills:&nbsp; {{currentChampionData.averagekills}}</p></div>
+ 		        <div class="col-lg-6"><p><b>Average Kills:&nbsp; {{currentChampionData.averagekills_2}}</p></div>
 		        <div class="col-lg-6"><p>Average Deaths:&nbsp;  {{currentChampionData.averagedeaths}}</p></div>
-		        <div class="col-lg-6"><p>Average Deaths:&nbsp;  {{currentChampionData.averagedeaths}}</p></div>
+		        <div class="col-lg-6"><p>Average Deaths:&nbsp;  {{currentChampionData.averagedeaths_2}}</p></div>
 		        <div class="col-lg-6"><p>Win rate:&nbsp;  {{currentChampionData.winrate}}%</p></div>
-		        <div class="col-lg-6"><p>Win rate:&nbsp;  {{currentChampionData.winrate}}%</p></div>
+		        <div class="col-lg-6"><p>Win rate:&nbsp;  {{currentChampionData.winrate_2}}%</p></div>
 		        <div class="col-lg-6"><p>Amount of champion data used for this champion:&nbsp;  {{currentChampionData.freq}}</b></p></div>
-		        <div class="col-lg-6"><p>Amount of champion data used for this champion:&nbsp;  {{currentChampionData.freq}}</b></p></div>
+		        <div class="col-lg-6"><p>Amount of champion data used for this champion:&nbsp;  {{currentChampionData.freq_2}}</b></p></div>
 	        </div>
 	   		<h5>Items </h5>
 	        <div class="row">
 	        	<div class="col-lg-6"><span style="padding-left: 15px; display: inline-block;" ng-repeat="item in currentChampionData.items"><img src={{"http://ddragon.leagueoflegends.com/cdn/"+currentChampionData.apiVersion+".1/img/item/"+item.id+".png"}} class="img-responsive" height="40" width="40" style="display: inline;">
 	        	<figcaption style="font-size:xx-small;">{{item.freq}}</figcaption></span></div>
-	        	<div class="col-lg-6"><span style="padding-left: 15px; display: inline-block;" ng-repeat="item in currentChampionData.items"><img src={{"http://ddragon.leagueoflegends.com/cdn/"+currentChampionData.apiVersion+".1/img/item/"+item.id+".png"}} class="img-responsive" height="40" width="40" style="display: inline;">
+	        	<div class="col-lg-6"><span style="padding-left: 15px; display: inline-block;" ng-repeat="item in currentChampionData.items_2"><img src={{"http://ddragon.leagueoflegends.com/cdn/"+currentChampionData.apiVersion_2+".1/img/item/"+item.id+".png"}} class="img-responsive" height="40" width="40" style="display: inline;">
 	        	<figcaption style="font-size:xx-small;">{{item.freq}}</figcaption></span></div>
 	        </div>
 	      </div>
