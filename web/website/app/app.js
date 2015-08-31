@@ -24,6 +24,9 @@ app.config(function($routeProvider) {
 app.controller('compareController', ['$scope', '$http', '$filter', '$window', function($scope, $http, $filter, $window) {
     'use strict';
     var orderBy = $filter('orderBy');
+    
+
+
     $scope.currentChampionData = {
         name : null,
         image: null,
@@ -66,19 +69,25 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
         $scope.currentChampionData.averagedeaths = item.averagedeaths;
         $scope.currentChampionData.items = item.items;
         $scope.currentChampionData.apiVersion = item.apiVersion;
-        if(item.apiVersion = 5.11) {
+        if(item.apiVersion == 5.11) {
             $scope.currentChampionData.apiVersion_2 = 5.14
-        } else if(item.apiVersion = 5.14) {
+        } else if(item.apiVersion == 5.14) {
             $scope.currentChampionData.apiVersion_2 = 5.11
         }
         $http.get('http://128.211.242.21:7001/api/NA'+$scope.currentChampionData.apiVersion_2+'N/champion/id/'+item.id).
           then(function(response) {
             if(!(response.data === "Not Found")) {
-                $scope.currentChampionData.freq_2 = response.data.freq;;
+                $scope.currentChampionData.freq_2 = response.data.freq;
                 $scope.currentChampionData.winrate_2 = ((response.data.wins*100)/response.data.freq).toFixed(2);
                 $scope.currentChampionData.averagekills_2 = (response.data.kills/response.data.freq).toFixed(1);
                 $scope.currentChampionData.averagedeaths_2 = (response.data.deaths/response.data.freq).toFixed(1);
                 $scope.currentChampionData.items_2 = response.data.items;
+            } else {
+                $scope.currentChampionData.freq_2 = "Not Available";
+                $scope.currentChampionData.winrate_2 = "Not Available";
+                $scope.currentChampionData.averagekills_2 = "Not Available";
+                $scope.currentChampionData.averagedeaths_2 = "Not Available";
+                $scope.currentChampionData.items_2 = null;
             }
           }, function(response) {
             console.log(response.data);
@@ -93,17 +102,29 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
             angular.forEach($scope.allChampions, function(item){
                 var champ = new ChampionData();
                 champ.apiVersion = 5.11;
+
                 champ.name = item.id;
+                if (champ.name == "MonkeyKing") {
+                    champ.name = "Wu Kong";
+                }
                 champ.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
                 $http.get('http://128.211.242.21:7001/api/NA5.11N/champion/id/'+item.key).
                   then(function(response) {
+                    champ.id = response.data.id;
                     if(!(response.data === "Not Found")) {
-                        champ.id = response.data.id;
+                        
                         champ.freq = response.data.freq;
                         champ.winrate = ((response.data.wins*100)/response.data.freq).toFixed(2);
                         champ.averagekills = (response.data.kills/response.data.freq).toFixed(1);
                         champ.averagedeaths = (response.data.deaths/response.data.freq).toFixed(1);
                         champ.items = response.data.items;
+                        $scope.allData.push(champ);
+                    } else {
+                        champ.freq = "Not Available";
+                        champ.winrate = "Not Available";
+                        champ.averagedeaths = "Not Available";
+                        champ.averagekills = "Not Available";
+                        champ.items = null;
                         $scope.allData.push(champ);
                     }
                   }, function(response) {
@@ -114,16 +135,27 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
                 var champ514 = new ChampionData();
                 champ514.apiVersion = 5.14;
                 champ514.name = item.id;
+                if (champ514.name == "MonkeyKing") {
+                    champ514.name = "Wu Kong";
+                }
                 champ514.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
                 $http.get('http://128.211.242.21:7001/api/NA5.14N/champion/id/'+item.key).
                   then(function(response) {
+                    champ514.id = response.data.id;
                     if(!(response.data === "Not Found")) {
-                        champ514.id = response.data.id;
+                        
                         champ514.freq = response.data.freq;
                         champ514.winrate = ((response.data.wins*100)/response.data.freq).toFixed(2);
                         champ514.averagekills = (response.data.kills/response.data.freq).toFixed(1);
                         champ514.averagedeaths = (response.data.deaths/response.data.freq).toFixed(1);
                         champ514.items = response.data.items;
+                        $scope.allData514.push(champ514);
+                    } else {
+                        champ514.freq = "Not Available";
+                        champ514.winrate = "Not Available";
+                        champ514.averagedeaths = "Not Available";
+                        champ514.averagekills = "Not Available";
+                        champ514.items = null;
                         $scope.allData514.push(champ514);
                     }
                   }, function(response) {

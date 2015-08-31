@@ -67,6 +67,124 @@ app.get('/api/NA5.14N/champion/id/:champId', function(req, res) {
     res.send("Not Found");
 });
 
+app.get('/api/NA5.11R/champion/id/:champId', function(req, res) {
+    json = getStaticJSON('NA5.11Ranked.json');
+    var champId = req.params.champId;
+    for(i = 0; i < json.length; i++){
+        if(json[i].id === champId) {
+            json[i].items.sort(function(a, b) { 
+                return b.freq - a.freq;
+            })
+            for(j = 0; j < json[i].items.length; j++) {
+                if (json[i].items[j].id == 0) {
+                    json[i].items.splice(j,j+1);
+                }
+            }
+            res.json(json[i]);
+        }
+    }
+    res.send("Not Found");
+});
+
+app.get('/api/NA5.14R/champion/id/:champId', function(req, res) {
+    json = getStaticJSON('NA5.14Ranked.json');
+    var champId = req.params.champId;
+    for(i = 0; i < json.length; i++){
+        if(json[i].id === champId) {
+            json[i].items.sort(function(a, b) { 
+                return b.freq - a.freq;
+            })
+            for(j = 0; j < json[i].items.length; j++) {
+                if (json[i].items[j].id == 0) {
+                    json[i].items.splice(j,j+1);
+                }
+            }
+            res.json(json[i]);
+        }
+    }
+    res.send("Not Found");
+});
+
+app.get('/api/EUW5.11N/champion/id/:champId', function(req, res) {
+    json = getStaticJSON('EUW5.11Normal.json');
+    var champId = req.params.champId;
+    for(i = 0; i < json.length; i++){
+        if(json[i].id === champId) {
+            json[i].items.sort(function(a, b) { 
+                return b.freq - a.freq;
+            })
+            for(j = 0; j < json[i].items.length; j++) {
+                if (json[i].items[j].id == 0) {
+                    json[i].items.splice(j,j+1);
+                }
+            }
+            res.json(json[i]);
+        }
+    }
+    res.send("Not Found");
+});
+
+app.get('/api/EUW5.14N/champion/id/:champId', function(req, res) {
+    json = getStaticJSON('EUW5.14Normal.json');
+    var champId = req.params.champId;
+    for(i = 0; i < json.length; i++){
+        if(json[i].id === champId) {
+            json[i].items.sort(function(a, b) { 
+                return b.freq - a.freq;
+            })
+            for(j = 0; j < json[i].items.length; j++) {
+                if (json[i].items[j].id == 0) {
+                    json[i].items.splice(j,j+1);
+                }
+            }
+            res.json(json[i]);
+        }
+    }
+    res.send("Not Found");
+});
+
+
+app.get('/api/KR5.11R/champion/id/:champId', function(req, res) {
+    json = getStaticJSON('KR5.11RANKED.json');
+    var champId = req.params.champId;
+    for(i = 0; i < json.length; i++){
+        if(json[i].id === champId) {
+            json[i].items.sort(function(a, b) { 
+                return b.freq - a.freq;
+            })
+            for(j = 0; j < json[i].items.length; j++) {
+                if (json[i].items[j].id == 0) {
+                    json[i].items.splice(j,j+1);
+                }
+            }
+            res.json(json[i]);
+        }
+    }
+    res.send("Not Found");
+});
+
+
+app.get('/api/EUW5.14R/champion/id/:champId', function(req, res) {
+    json = getStaticJSON('KR5.14RANKED.json');
+    var champId = req.params.champId;
+    for(i = 0; i < json.length; i++){
+        if(json[i].id === champId) {
+            json[i].items.sort(function(a, b) { 
+                return b.freq - a.freq;
+            })
+            for(j = 0; j < json[i].items.length; j++) {
+                if (json[i].items[j].id == 0) {
+                    json[i].items.splice(j,j+1);
+                }
+            }
+            res.json(json[i]);
+        }
+    }
+    res.send("Not Found");
+});
+
+
+
 app.listen(7001);
 
 app.use(function(err, req, res, next) {
