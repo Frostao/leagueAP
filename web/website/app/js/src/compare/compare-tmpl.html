@@ -62,7 +62,7 @@
 						</thead>
 						<tbody ng-repeat="item in allData">
 						  <tr>
-						    <td><img src={{item.image}} class="img-responsive img-circle" height="80" width="80"></td>
+						    <td><a ng-click="getChampionData(item.id,item.name)" data-toggle="modal" data-target="#myModal" href=""> <img src={{item.image}} class="img-responsive img-circle" height="80" width="80"> </a></td>
 						    <td><a ng-click=""data-toggle="modal" data-target="#myModal" href="">{{item.name}}</a></td>
 						    <td>{{item.averagekills}}</td>
 						    <td>{{item.winrate}}</td>

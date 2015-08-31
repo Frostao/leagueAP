@@ -37,6 +37,15 @@ app.get('/api/champion/id/:champId', function(req, res) {
             json[i].items.sort(function(a, b) { 
                 return b.freq - a.freq;
             })
+            for(j = 0; j < json[i].items.length; j++) {
+                if (json[i].items[j].id == 0) {
+                    for (k=j; k < json[i].items.length;k++) {
+                        if (k != json[i].items.length-2) {
+                            json[i].items[k] = json[i].items[k+1];
+                        }
+                    }
+                }
+            }
     		res.json(json[i]);
     	}
 	}
