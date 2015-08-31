@@ -43,6 +43,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
         this.averagekills = 0;
         this.averagedeaths = 0;
         this.items = [];
+        this.apiVersion = 5.11;
     }
     $scope.allData = []
     $scope.allData514 = []
@@ -57,6 +58,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
         $scope.currentChampionData.averagekills = item.averagekills;
         $scope.currentChampionData.averagedeaths = item.averagedeaths;
         $scope.currentChampionData.items = item.items;
+        $scope.currentChampionData.apiVersion = item.apiVersion;
         
     }
 
@@ -67,6 +69,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
             $scope.allChampions = angular.fromJson(response.data.data);
             angular.forEach($scope.allChampions, function(item){
                 var champ = new ChampionData();
+                champ.apiVersion = 5.11;
                 champ.name = item.id;
                 champ.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
                 $http.get('http://128.211.242.21:7001/api/NA5.11N/champion/id/'+item.key).
@@ -86,6 +89,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
 
 
                 var champ514 = new ChampionData();
+                champ514.apiVersion = 5.14;
                 champ514.name = item.id;
                 champ514.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
                 $http.get('http://128.211.242.21:7001/api/NA5.14N/champion/id/'+item.key).
