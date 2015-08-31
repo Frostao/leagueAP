@@ -24,16 +24,16 @@ app.config(function($routeProvider) {
 app.controller('compareController', ['$scope', '$http', '$filter', function($scope, $http, $filter) {
     'use strict';
     var orderBy = $filter('orderBy');
-    /*var ChampionData = {
+    $scope.currentChampionData = {
         name : null,
         image: null,
         id : 0,
         freq : 0,
-        wins : 0,
-        kills : 0,
-        deaths : 0,
+        winrate : 0,
+        averagekills : 0,
+        averagedeaths : 0,
         items : []
-    }*/
+    }
     function ChampionData () {
         this.name = null;
         this.image = null;
@@ -47,17 +47,16 @@ app.controller('compareController', ['$scope', '$http', '$filter', function($sco
     $scope.allData = []
     $scope.allData514 = []
     $scope.allChampions = {}
-    $scope.currentChampion = {}
-    $scope.currentHeader = null;
 
-    $scope.getChampionData = function(name, freq, winrate, averagekills, averagedeaths, items) {
-        console.log(id);
-        $scope.currentHeader = name;
-        $scope.freq = freq;
-        $scope.winrate = winrate;
-        $scope.averagekills = averagekills;
-        $scope.averagedeaths = averagedeaths;
-        $scope.items = items;
+    $scope.getChampionData = function(item) {
+        $scope.currentChampionData.name = item.name;
+        $scope.currentChampionData.image = item.image;
+        $scope.currentChampionData.id = item.id;
+        $scope.currentChampionData.freq = item.freq;
+        $scope.currentChampionData.winrate = item.winrate;
+        $scope.currentChampionData.averagekills = item.averagekills;
+        $scope.currentChampionData.averagedeaths = item.averagedeaths;
+        $scope.currentChampionData.items = item.items;
         
     }
 

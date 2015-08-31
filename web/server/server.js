@@ -45,7 +45,7 @@ app.get('/api/NA5.11N/champion/id/:champId', function(req, res) {
     		res.json(json[i]);
     	}
 	}
-	res.json("[]");
+	res.send("Not Found");
 });
 
 app.get('/api/NA5.14N/champion/id/:champId', function(req, res) {
@@ -64,7 +64,7 @@ app.get('/api/NA5.14N/champion/id/:champId', function(req, res) {
             res.json(json[i]);
         }
     }
-    res.json("[]");
+    res.send("Not Found");
 });
 
 app.listen(7001);
