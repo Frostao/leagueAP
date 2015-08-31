@@ -32,7 +32,7 @@ app.get('/api/all', function(req, res) {
 app.get('/api/champion/id/:champId', function(req, res) {
 	json = getStaticJSON('output.json');
 	var champId = req.params.champId;
-	for(i = 0; i < 122; i++){
+	for(i = 0; i < json.length; i++){
     	if(json[i].id === champId) {
             json[i].items.sort(function(a, b) { 
                 return b.freq - a.freq;
