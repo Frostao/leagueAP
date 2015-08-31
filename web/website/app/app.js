@@ -50,9 +50,14 @@ app.controller('compareController', ['$scope', '$http', '$filter', function($sco
     $scope.currentChampion = {}
     $scope.currentHeader = null;
 
-    $scope.getChampionData = function(id, name) {
+    $scope.getChampionData = function(name, freq, winrate, averagekills, averagedeaths) {
         console.log(id);
         $scope.currentHeader = name;
+        $scope.freq = freq;
+        $scope.winrate = winrate;
+        $scope.averagekills = averagekills;
+        $scope.averagedeaths = averagedeaths;
+        
     }
 
     // create a message to display in our view
@@ -110,7 +115,12 @@ app.controller('compareController', ['$scope', '$http', '$filter', function($sco
 
     $scope.order = function(predicate, reverse) {
         $scope.allData = orderBy($scope.allData, predicate, reverse);
-    };  
+    };
+
+    $scope.order514 = function(predicate, reverse) {
+        $scope.allData514 = orderBy($scope.allData514, predicate, reverse);
+    };
+
 }]);
 //http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/Aatrox.png
 app.controller('authorsController', function($scope) {
