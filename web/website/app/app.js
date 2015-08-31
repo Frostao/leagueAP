@@ -45,6 +45,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', function($sco
         this.items = [];
     }
     $scope.allData = []
+    $scope.allData514 = []
     $scope.allChampions = {}
     $scope.currentChampion = {}
     $scope.currentHeader = null;
@@ -63,7 +64,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', function($sco
                 var champ = new ChampionData();
                 champ.name = item.id;
                 champ.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
-                $http.get('http://128.211.242.21:7001/api/champion/id/'+item.key).
+                $http.get('http://128.211.242.21:7001/api/NA5.11N/champion/id/'+item.key).
                   then(function(response) {
                     champ.id = response.data.id;
                     champ.freq = response.data.freq;
@@ -72,6 +73,23 @@ app.controller('compareController', ['$scope', '$http', '$filter', function($sco
                     champ.averagedeaths = (response.data.deaths/response.data.freq).toFixed(1);
                     champ.items = response.data.items;
                     $scope.allData.push(champ);
+                  }, function(response) {
+                    console.log(response.data);
+                  }); 
+
+
+                var champ514 = new ChampionData();
+                champ514.name = item.id;
+                champ514.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
+                $http.get('http://128.211.242.21:7001/api/NA5.14N/champion/id/'+item.key).
+                  then(function(response) {
+                    champ514.id = response.data.id;
+                    champ514.freq = response.data.freq;
+                    champ514.winrate = ((response.data.wins*100)/response.data.freq).toFixed(2);
+                    champ514.averagekills = (response.data.kills/response.data.freq).toFixed(1);
+                    champ514.averagedeaths = (response.data.deaths/response.data.freq).toFixed(1);
+                    champ514.items = response.data.items;
+                    $scope.allData514.push(champ514);
                   }, function(response) {
                     console.log(response.data);
                   }); 

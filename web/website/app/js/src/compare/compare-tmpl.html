@@ -28,12 +28,12 @@
 						    <td>{{item.winrate}}</td>
 						    <td>
 						    	<div class="row">
-							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[0].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
-							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[1].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
-							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[2].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
-							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[3].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
-							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[4].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
-							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[5].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.11.1/img/item/"+item.items[0].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.11.1/img/item/"+item.items[1].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.11.1/img/item/"+item.items[2].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.11.1/img/item/"+item.items[3].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.11.1/img/item/"+item.items[4].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.11.1/img/item/"+item.items[5].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
 							    </div>
 						    </td>
 						  </tr>
@@ -48,19 +48,19 @@
 						<thead>
 						  <tr>
 						    <th></th>
-						    <th><a href="" ng-click="reverse=false;order('name', false)">Champion</a>
-						    	(<a href="" ng-click="order('-name',false)">^</a>)
+						    <th><a href="" ng-click="reverse=false;order514('name', false)">Champion</a>
+						    	(<a href="" ng-click="order514('-name',false)">^</a>)
 						    </th>
-						    <th><a href="" ng-click="reverse=false;order('averagekills', false)">Average Kills</a>
-						    	(<a href="" ng-click="order('-averagekills',false)">^</a>)
+						    <th><a href="" ng-click="reverse=false;order514('averagekills', false)">Average Kills</a>
+						    	(<a href="" ng-click="order514('-averagekills',false)">^</a>)
 						    </th>
-							<th><a href="" ng-click="reverse=false;order('winrate', false)">Win Rate</a>
-								(<a href="" ng-click="order('-winrate',false)">^</a>)
+							<th><a href="" ng-click="reverse=false;order514('winrate', false)">Win Rate</a>
+								(<a href="" ng-click="order514('-winrate',false)">^</a>)
 							</th>			
 						    <th>Popular Items</th>
 						  </tr>
 						</thead>
-						<tbody ng-repeat="item in allData">
+						<tbody ng-repeat="item in allData514">
 						  <tr>
 						    <td><a ng-click="getChampionData(item.id,item.name)" data-toggle="modal" data-target="#myModal" href=""> <img src={{item.image}} class="img-responsive img-circle" height="80" width="80"> </a></td>
 						    <td><a ng-click=""data-toggle="modal" data-target="#myModal" href="">{{item.name}}</a></td>
@@ -68,12 +68,12 @@
 						    <td>{{item.winrate}}</td>
 						    <td>
 						    	<div class="row">
-							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[0].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
-							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[1].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
-							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[2].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
-							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[3].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
-							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[4].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
-							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/"+item.items[5].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.14.1/img/item/"+item.items[0].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.14.1/img/item/"+item.items[1].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.14.1/img/item/"+item.items[2].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.14.1/img/item/"+item.items[3].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.14.1/img/item/"+item.items[4].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
+							    	<img src={{"http://ddragon.leagueoflegends.com/cdn/5.14.1/img/item/"+item.items[5].id+".png"}} class="img-responsive" height="30" width="30" style="display: inline;">
 							    </div>
 						    </td>
 						  </tr>
