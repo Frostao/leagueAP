@@ -9,10 +9,9 @@ This is a project build for the League of Legends API Challenge 2.0 problem two 
 
 What we did was using the match IDs which were provided to retrieve the champion information from Riot's API. For each match, we found the top four most magic damage dealt champion and record their kills, deaths, wins and most importantly, their items. Then we present those information we got in a AngularJS Application.
 
-There is separate documentation in each necessary folder.
 #Live Here
 
-Currently it is hosted [here](www.frostao.com)
+Currently it is hosted [here](http://www.frostao.com)
 
 #Technologies Used
 AngularJS
