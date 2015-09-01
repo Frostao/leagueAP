@@ -9,12 +9,11 @@
 			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('North America(Ranked)', 'NA', 'R')" tabindex="-1">North America(Ranked)</a></li>
 			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Korea(Ranked)', 'KR', 'R')" tabindex="-1">Korea(Ranked)</a></li>
 			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Europe(Normal)', 'EUW', 'N')" tabindex="-1">Europe(Normal)</a></li>
-			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Europe(Ranked)','EUW', 'R')" tabindex="-1">Europe(Ranked)</a></li>
 			    </ul>
 			</div>
 		</div>
-		<div ng-if='region!=="Select Region"' class="row">
-			<div style="color: #FFFFFF;" class="col-md-6">
+		<div style="height:900px; overflow-y: scroll;color: #FFFFFF;" ng-if='region!=="Select Region"' class="row">
+			<div class="col-md-6">
 				<h2 style="color: #FFFFFF;">Patch 5.11</h2>
 				<div class="table-responsive">          
 					<table class="table">
@@ -54,7 +53,7 @@
 					</table>
 				</div>
 			</div>
-			<div style="color: #FFFFFF;" class="col-md-6">
+			<div class="col-md-6">
 				<h2 >Patch 5.14</h2>
 				<div class="table-responsive">          
 					<table class="table">
@@ -126,9 +125,9 @@
 	   		<h5>Items </h5>
 	        <div class="row">
 	        	<div class="col-lg-6"><span style="padding-left: 15px; display: inline-block;" ng-repeat="item in currentChampionData.items"><img src={{"http://ddragon.leagueoflegends.com/cdn/"+currentChampionData.apiVersion+".1/img/item/"+item.id+".png"}} class="img-responsive" height="40" width="40" style="display: inline;">
-	        	<figcaption style="font-size:xx-small;">{{item.freq}}</figcaption></span></div>
+	        	<figcaption style="font-size:xx-small;">{{(item.freq*100/currentChampionData.freq).toFixed(2)+"%"}}</figcaption></span></div>
 	        	<div class="col-lg-6"><span style="padding-left: 15px; display: inline-block;" ng-repeat="item in currentChampionData.items_2"><img src={{"http://ddragon.leagueoflegends.com/cdn/"+currentChampionData.apiVersion_2+".1/img/item/"+item.id+".png"}} class="img-responsive" height="40" width="40" style="display: inline;">
-	        	<figcaption style="font-size:xx-small;">{{item.freq}}</figcaption></span></div>
+	        	<figcaption style="font-size:xx-small;">{{(item.freq*100/currentChampionData.freq_2).toFixed(2)+"%"}}</figcaption></span></div>
 	        </div>
 	      </div>
 	      <div class="modal-footer">
