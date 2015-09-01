@@ -21,11 +21,12 @@ app.config(function($routeProvider) {
         });
 });
 
-app.controller('compareController', ['$scope', '$http', '$filter', '$window', function($scope, $http, $filter, $window) {
+app.controller('compareController', ['$scope', '$http', '$filter', '$window', '$rootScope', function($scope, $http, $filter, $window, $rootScope) {
     'use strict';
     var orderBy = $filter('orderBy');
-
-
+    $rootScope.region = "Select Region"
+    $rootScope.regioncode = "NA";
+    $rootScope.order = "R";
 
     $scope.currentChampionData = {
         name : null,
@@ -74,7 +75,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
         } else if(item.apiVersion == 5.14) {
             $scope.currentChampionData.apiVersion_2 = 5.11
         }
-        $http.get('http://128.211.242.21:7001/api/KR'+$scope.currentChampionData.apiVersion_2+'R/champion/id/'+item.id).
+        $http.get('http://128.211.242.21:7001/api/'+$rootScope.regioncode+$scope.currentChampionData.apiVersion_2+$rootScope.order+'/champion/id/'+item.id).
           then(function(response) {
             if(!(response.data === "Not Found")) {
                 $scope.currentChampionData.freq_2 = response.data.freq;
@@ -108,7 +109,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
                     champ.name = "Wu Kong";
                 }
                 champ.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
-                $http.get('http://128.211.242.21:7001/api/KR5.11R/champion/id/'+item.key).
+                $http.get('http://128.211.242.21:7001/api/'+$rootScope.regioncode+'5.11'+$rootScope.order+'/champion/id/'+item.key).
                   then(function(response) {
                     champ.id = response.data.id;
                     if(!(response.data === "Not Found")) {
@@ -139,7 +140,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
                     champ514.name = "Wu Kong";
                 }
                 champ514.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
-                $http.get('http://128.211.242.21:7001/api/KR5.14R/champion/id/'+item.key).
+                $http.get('http://128.211.242.21:7001/api/'+$rootScope.regioncode+'5.14'+$rootScope.order+'/champion/id/'+item.key).
                   then(function(response) {
                     champ514.id = response.data.id;
                     if(!(response.data === "Not Found")) {
@@ -183,7 +184,6 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
             $scope.order514('name',false);
         });
     }
-    $scope.getAllLeagueAPData();
 
     $scope.order = function(predicate, reverse) {
         $scope.allData = orderBy($scope.allData, predicate, reverse);
@@ -192,6 +192,15 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', fu
     $scope.order514 = function(predicate, reverse) {
         $scope.allData514 = orderBy($scope.allData514, predicate, reverse);
     };
+
+    $scope.changeRegion = function(region, regioncode, order) {
+        $rootScope.region = region;
+        $rootScope.regioncode = regioncode;
+        $rootScope.order = order;
+        $scope.allData = []
+        $scope.allData514 = []
+        $scope.getAllLeagueAPData();
+    }
 
 }]);
 //http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/Aatrox.png

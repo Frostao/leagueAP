@@ -1,6 +1,19 @@
 <div ng-controller="compareController">	
 		<div class="container" id="allData">
 		<div class="row">
+			<div class="dropdown">
+			    <a class="btn btn-primary btn-lg" id="menu1" data-toggle="dropdown">{{region}}
+			    <span class="caret"></span></a>
+			    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('North America(Normal)', 'NA', 'N')" tabindex="-1">North America(Normal)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('North America(Ranked)', 'NA', 'R')" tabindex="-1">North America(Ranked)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Korea(Ranked)', 'KR', 'R')" tabindex="-1">Korea(Ranked)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Europe(Normal)', 'EUW', 'N')" tabindex="-1">Europe(Normal)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Europe(Ranked)','EUW', 'R')" tabindex="-1">Europe(Ranked)</a></li>
+			    </ul>
+			</div>
+		</div>
+		<div ng-if='region!=="Select Region"' class="row">
 			<div style="color: #FFFFFF;" class="col-md-6">
 				<h2 style="color: #FFFFFF;">Patch 5.11</h2>
 				<div class="table-responsive">          
