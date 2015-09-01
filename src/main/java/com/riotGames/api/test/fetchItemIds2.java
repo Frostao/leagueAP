@@ -19,7 +19,7 @@ import org.json.simple.parser.ParseException;
 import com.google.gson.Gson;
 
 
-public class fetchItemIds {
+public class fetchItemIds2 {
 	//The main JSON - global variable(data source for the website)
 	static ArrayList<Champion> theJSON = new ArrayList<Champion>();
 	static int errors;
@@ -45,7 +45,7 @@ public class fetchItemIds {
 		//Set<String> set514 = new HashSet<String>();
 		//Not using yet
 		try {
-			Object obj_511 = parser.parse(new FileReader("src/main/resources/AP_ITEM_DATASET/5.14/RANKED_SOLO/EUW.json"));
+			Object obj_511 = parser.parse(new FileReader("src/main/resources/AP_ITEM_DATASET/5.11/RANKED_SOLO/BR.json"));
 			
 			//Object obj_514 = parser.parse(new FileReader("src/main/resources/NA_5.14.json"));
 			
@@ -61,7 +61,7 @@ public class fetchItemIds {
 			}
 			
 			String json = new Gson().toJson(theJSON);
-			FileWriter writer = new FileWriter("src/main/resources/responses/EUW5.14Ranked.json"); 
+			FileWriter writer = new FileWriter("src/main/resources/responses/BR5.11Ranked.json"); 
 
 			writer.write(json);
 //			for(String str: set511) {
