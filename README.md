@@ -11,7 +11,7 @@ What we did was using the match IDs which were provided to retrieve the champion
 
 #Live Here
 
-Currently it is hosted [here](www.frostao.com)
+Currently it is hosted [here](http://www.frostao.com)
 
 #Technologies Used
 AngularJS
