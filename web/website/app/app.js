@@ -1,6 +1,6 @@
 (function () {
 'use strict';
-var app = angular.module('leagueApp', ['ngRoute']);
+var app = angular.module('leagueApp', ['ngRoute', 'ngProgress']);
 
 app.config(function($routeProvider) {
     $routeProvider
@@ -21,15 +21,20 @@ app.config(function($routeProvider) {
         });
 });
 
-app.controller('compareController', ['$scope', '$http', '$filter', '$window', '$rootScope', function($scope, $http, $filter, $window, $rootScope) {
+app.controller('compareController', ['$scope', '$http', '$filter', '$window', '$rootScope', 'ngProgressFactory',function($scope, $http, $filter, $window, $rootScope, ngProgressFactory) {
     'use strict';
     var orderBy = $filter('orderBy');
     $rootScope.region = "Select Region"
     $rootScope.regioncode = "NA";
     $rootScope.order = "R";
+    $scope.progressbar = ngProgressFactory.createInstance();
+    $scope.progressbar.setParent(document.getElementById('progress'));
+    $scope.progressbar.setColor('#FFFFFF');
+    $scope.progressbar.setHeight('5px');
 
     $scope.currentChampionData = {
         name : null,
+        realName : null,
         image: null,
         id : 0,
         freq : 0,
@@ -47,6 +52,7 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', '$
     }
     function ChampionData () {
         this.name = null;
+        this.realName = null;
         this.image = null;
         this.id = 0;
         this.freq = 0;
@@ -61,8 +67,8 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', '$
     $scope.allChampions = {}
 
     $scope.getChampionData = function(item) {
-        console.log("mylog "+item.id);
         $scope.currentChampionData.name = item.name;
+        $scope.currentChampionData.realName = item.realName;
         $scope.currentChampionData.image = item.image;
         $scope.currentChampionData.id = item.id;
         $scope.currentChampionData.freq = item.freq;
@@ -98,17 +104,46 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', '$
 
     // create a message to display in our view
     $scope.getAllLeagueAPData = function() {
+        $scope.progressbar.start();
         $http.get('http://ddragon.leagueoflegends.com/cdn/5.16.1/data/en_US/champion.json').
           then(function(response) {
             $scope.allChampions = angular.fromJson(response.data.data);
             angular.forEach($scope.allChampions, function(item){
                 var champ = new ChampionData();
                 champ.apiVersion = 5.11;
-
+                champ.realName = item.id;
                 champ.name = item.id;
                 if (champ.name == "MonkeyKing") {
                     champ.name = "Wu Kong";
+                } else if (champ.name == "Chogath") {
+                    champ.name = "Cho'Gath";
+                } else if (champ.name == "DrMundo") {
+                    champ.name = "Dr Mundo";
+                } else if (champ.name == "JarvanIV") {
+                    champ.name = "Jarvan IV";
+                } else if (champ.name == "Khazix") {
+                    champ.name = "Kha'Zix";
+                } else if (champ.name == "KogMaw") {
+                    champ.name = "Kog'Maw";
+                } else if (champ.name == "LeeSin") {
+                    champ.name = "Lee Sin";
+                } else if (champ.name == "MasterYi") {
+                    champ.name = "Master Yi";
+                } else if (champ.name == "MissFortune") {
+                    champ.name = "Miss Fortune";
+                } else if (champ.name == "RekSai") {
+                    champ.name = "Rek'Sai";
+                } else if (champ.name == "TahmKench") {
+                    champ.name = "Tahm Kench";
+                } else if (champ.name == "TwistedFate") {
+                    champ.name = "Twisted Fate";
+                } else if (champ.name == "Velkoz") {
+                    champ.name = "Vel'Koz";
+                } else if (champ.name == "XinZhao") {
+                    champ.name = "Xin Zhao";
                 }
+
+
                 champ.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
                 $http.get('http://128.211.242.21:7001/api/'+$rootScope.regioncode+'5.11'+$rootScope.order+'/champion/id/'+item.key).
 
@@ -135,12 +170,39 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', '$
                     console.log(response.data);
                   }); 
 
-
+                $scope.progressbar.stop();
                 var champ514 = new ChampionData();
                 champ514.apiVersion = 5.14;
+                champ514.realName = item.id;
                 champ514.name = item.id;
                 if (champ514.name == "MonkeyKing") {
                     champ514.name = "Wu Kong";
+                } else if (champ514.name == "Chogath") {
+                    champ514.name = "Cho'Gath";
+                } else if (champ514.name == "DrMundo") {
+                    champ514.name = "Dr Mundo";
+                } else if (champ514.name == "JarvanIV") {
+                    champ514.name = "Jarvan IV";
+                } else if (champ514.name == "Khazix") {
+                    champ514.name = "Kha'Zix";
+                } else if (champ514.name == "KogMaw") {
+                    champ514.name = "Kog'Maw";
+                } else if (champ514.name == "LeeSin") {
+                    champ514.name = "Lee Sin";
+                } else if (champ514.name == "MasterYi") {
+                    champ514.name = "Master Yi";
+                } else if (champ514.name == "MissFortune") {
+                    champ514.name = "Miss Fortune";
+                } else if (champ514.name == "RekSai") {
+                    champ514.name = "Rek'Sai";
+                } else if (champ514.name == "TahmKench") {
+                    champ514.name = "Tahm Kench";
+                } else if (champ514.name == "TwistedFate") {
+                    champ514.name = "Twisted Fate";
+                } else if (champ514.name == "Velkoz") {
+                    champ514.name = "Vel'Koz";
+                } else if (champ514.name == "XinZhao") {
+                    champ514.name = "Xin Zhao";
                 }
                 champ514.image = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/"+item.id+".png";
                 $http.get('http://128.211.242.21:7001/api/'+$rootScope.regioncode+'5.14'+$rootScope.order+'/champion/id/'+item.key).
@@ -168,7 +230,8 @@ app.controller('compareController', ['$scope', '$http', '$filter', '$window', '$
             })
           }, function(response) {
             console.log(response.data);
-          });   
+          }); 
+          $scope.progressbar.complete();  
     }
     $scope.sortAllData = function() {
         $scope.allData.sort(function(a, b) { 

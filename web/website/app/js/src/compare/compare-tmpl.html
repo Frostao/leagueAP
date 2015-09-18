@@ -1,4 +1,5 @@
 <div ng-controller="compareController">	
+	<div id="progress"></div>
 		<div class="container" id="allData">
 		<div class="row">
 			<div class="dropdown">
@@ -7,8 +8,24 @@
 			    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('North America(Normal)', 'NA', 'N')" tabindex="-1">North America(Normal)</a></li>
 			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('North America(Ranked)', 'NA', 'R')" tabindex="-1">North America(Ranked)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('North Latin America(Normal)', 'LAN', 'N')" tabindex="-1">North Latin America(Normal)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('North Latin America(Ranked)', 'LAN', 'R')" tabindex="-1">North Latin America(Ranked)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('South Latin America(Normal)', 'LAS', 'N')" tabindex="-1">South Latin America(Normal)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('South Latin America(Ranked)', 'LAS', 'R')" tabindex="-1">South Latin America(Ranked)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Brazil(Ranked)', 'BR', 'R')" tabindex="-1">Brazil(Ranked)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Brazil(Normal)', 'BR', 'N')" tabindex="-1">Brazil(Normal)</a></li>
 			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Korea(Ranked)', 'KR', 'R')" tabindex="-1">Korea(Ranked)</a></li>
-			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Europe(Normal)', 'EUW', 'N')" tabindex="-1">West Europe(Normal)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Korea(Normal)', 'KR', 'N')" tabindex="-1">Korea(Normal)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('EU West(Normal)', 'EUW', 'N')" tabindex="-1">EU West(Normal)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('EU West(Ranked)', 'EUW', 'R')" tabindex="-1">EU West(Ranked)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('EU Nordic and East(Normal)', 'EUNE', 'N')" tabindex="-1">EU Nordic and East(Normal)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('EU Nordic and East(Ranked)', 'EUNE', 'R')" tabindex="-1">EU Nordic and East(Ranked)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Oceania(Normal)', 'OCE', 'N')" tabindex="-1">Oceania(Normal)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Oceania(Ranked)', 'OCE', 'R')" tabindex="-1">Oceania(Ranked)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Turkey(Normal)', 'TR', 'N')" tabindex="-1">Turkey(Normal)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Turkey(Ranked)', 'TR', 'R')" tabindex="-1">Turkey(Ranked)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Russia(Normal)', 'RU', 'N')" tabindex="-1">Russia(Normal)</a></li>
+			      <li role="presentation"><a role="menuitem" ng-click="changeRegion('Russia(Ranked)', 'RU', 'R')" tabindex="-1">Russia(Ranked)</a></li>
 			    </ul>
 			</div>
 		</div>
@@ -93,6 +110,7 @@
 					</table>
 				</div>
 			</div>
+			<BR>&nbsp;<BR> 
 			<p style="color: #FFFFFF;">Some champion data are not available due to the way we retrived our data due to in some matches, there may be less than 4 AP champions.</p>
 			<p style="color: #FFFFFF;">Most of the champion data are AP champion or AP direction.</p>
 		</div>
@@ -108,11 +126,11 @@
 	      </div>
 	      <div class="modal-body">
 	      	<!-- Get currentChampion data to be presented over here use the object within these to access it{{}} !-->
-	        <img src={{"http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+currentChampionData.name+"_0.jpg"}} class="img-responsive" height="1500" width="900" style="display: inline;">
+	        <img src={{"http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+currentChampionData.realName+"_0.jpg"}} class="img-responsive" height="1500" width="900" style="display: inline;">
 
 	        <div style="text-align: center">
-    			<div class="col-lg-6"><p>Patch {{currentChampionData.apiVersion}}</p></div>
-    			<div class="col-lg-6"><p>Patch {{currentChampionData.apiVersion_2}}</p></div>
+    			<div class="col-lg-6"><p><b>Patch {{currentChampionData.apiVersion}}</b></p></div>
+    			<div class="col-lg-6"><p><b>Patch {{currentChampionData.apiVersion_2}}</b></p></div>
  		        <div class="col-lg-6"><p><b>Average Kills:&nbsp; {{currentChampionData.averagekills}}</p></div>
  		        <div class="col-lg-6"><p><b>Average Kills:&nbsp; {{currentChampionData.averagekills_2}}</p></div>
 		        <div class="col-lg-6"><p>Average Deaths:&nbsp;  {{currentChampionData.averagedeaths}}</p></div>
